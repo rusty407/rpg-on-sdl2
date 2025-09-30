@@ -1,4 +1,3 @@
-//Using SDL and standard IO
 #include <SDL.h>
 #include <cstddef>
 #include <stdio.h>
