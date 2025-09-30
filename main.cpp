@@ -28,14 +28,21 @@ bool init() {
    return success; // return success cuz we got boolean value over there so function needs to know return is true of false to execute
 }
 
-bool loadMedia(); 
-//void close();
+bool loadMedia() {
+    bool success = true;
+    const char* myImage = "/home/console/Documents/sdl-project/rpg_on_sdl2/vectoraith_tileset_farmingsims_terrain_fall_expanded.bmp";
+    gBackground = SDL_LoadBMP(myImage);
+    if(gBackground == NULL) {
+        printf("Failed to initialize media because of: %s\n", myImage, SDL_GetError());
+        success = false;
+    } 
+    return success;
+}; 
 
 int main( int argc, char* args[] ) {
     if(!init()) {
-        printf("Failure during executing program");
+        printf("Failure during executing program: %s\n", SDL_GetError());
     } else if (!loadMedia()) {
-        printf("Failure during executing media files");
-    } else {};
-
+        printf("Failure during executing media files %s\n", SDL_GetError());
+    } else {}
 }
