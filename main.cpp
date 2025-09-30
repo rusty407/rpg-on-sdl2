@@ -4,7 +4,7 @@
 
 //Screen dimension constants
 const int SCREEN_WIDTH = 1024;
-const int SCREEN_HEIGHT = 720;
+const int SCREEN_HEIGHT = 768;
 
 SDL_Window* gWindow = NULL;
 SDL_Surface* gScreenSurface = NULL;
@@ -43,10 +43,10 @@ bool loadMedia() {
     bool success = true;
 
     //Load splash image
-    gBasicMap = SDL_LoadBMP( "/home/console/Documents/sdl-project/rpg_on_sdl2/vectoraith_tileset_farmingsims_terrain_fall_expanded.bmp" );
+    gBasicMap = SDL_LoadBMP( "/home/console/Documents/sdl-project/rpg_on_sdl2/map.bmp" );
     if( gBasicMap == NULL )
     {
-        printf( "Unable to load image %s! SDL Error: %s\n", "/home/console/Documents/sdl-project/rpg_on_sdl2/vectoraith_tileset_farmingsims_terrain_fall_expanded.bmp", SDL_GetError() );
+        printf( "Unable to load image %s! SDL Error: %s\n", "/home/console/Documents/sdl-project/rpg_on_sdl2/map.bmp", SDL_GetError() );
         success = false;
     }
 
