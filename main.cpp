@@ -59,15 +59,13 @@ int main( int argc, char* args[] ) {
         // don't close before i click the close button
         SDL_Event e;
         bool quit = false;
-
         while(quit == false) {
             while(SDL_PollEvent(&e)) {
                 if(e.type == SDL_QUIT) {
                     quit = true;
-                } 
+                }
             }
         }
-
     }
     // free memory
     close();
