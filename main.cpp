@@ -39,6 +39,15 @@ bool loadMedia() {
     return success;
 }; 
 
+void close() {
+    // delocate surface
+    SDL_FreeSurface(gBackground);
+    gBackground = NULL;
+    // destroy window
+    SDL_DestroyWindow(gWindow);
+    gWindow = NULL;
+}
+
 int main( int argc, char* args[] ) {
     if(!init()) {
         printf("Failure during executing program: %s\n", SDL_GetError());
