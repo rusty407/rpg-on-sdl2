@@ -30,7 +30,7 @@ bool init() {
 
 bool loadMedia() {
     bool success = true;
-    const char* myImage = "/home/console/Documents/sdl-project/rpg_on_sdl2/vectoraith_tileset_farmingsims_terrain_fall_expanded.bmp";
+    const char* myImage = "/home/console/Documents/sdl-project/rpg_on_sdl2/map.bmp";
     gBackground = SDL_LoadBMP(myImage);
     if(gBackground == NULL) {
         printf("Failed to initialize media because of: %s\n", myImage, SDL_GetError());
@@ -53,5 +53,24 @@ int main( int argc, char* args[] ) {
         printf("Failure during executing program: %s\n", SDL_GetError());
     } else if (!loadMedia()) {
         printf("Failure during executing media files %s\n", SDL_GetError());
-    } else {}
+    } else {
+        SDL_BlitSurface(gBackground, NULL, gScreenSurface, NULL);
+        // update surface
+        SDL_UpdateWindowSurface(gWindow);
+        // don't close before i click the close button
+        SDL_Event e;
+        bool quit = false;
+
+        while(quit == false) {
+            while(SDL_PollEvent(&e)) {
+                if(e.type == SDL_QUIT) {
+                    quit = true;
+                } 
+            }
+        }
+
+    }
+    // free memory
+    close();
+    return 0;
 }
