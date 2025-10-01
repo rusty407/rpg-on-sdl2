@@ -9,7 +9,6 @@ SDL_Window* gWindow = NULL;
 SDL_Surface* gScreenSurface = NULL;
 SDL_Surface* gBackground = NULL;
 
-
 // with this function we initialize creation of window in SDL
 bool init() {
    bool success = true; 
