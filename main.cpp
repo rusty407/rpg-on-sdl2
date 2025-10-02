@@ -17,7 +17,8 @@ enum KeySurfacePresses {
     KEY_SURFACE_PRESS_DOWN,
     KEY_SURFACE_PRESS_UP,
     KEY_SURFACE_PRESS_TOTAL
-}
+}; // pls don't forget semicolon after enum took me decades to debug
+
 SDL_Surface* gKeySurfacePresses[ KEY_SURFACE_PRESS_TOTAL ];
 SDL_Surface* gCurrentSurface = NULL;
 
@@ -85,8 +86,8 @@ SDL_Surface* loadSurface( std::string path ) {
 
 void close() {
     // delocate surface
-    SDL_FreeSurface(gBackground);
-    gBackground = NULL;
+    SDL_FreeSurface(gCurrentSurface);
+    gCurrentSurface = NULL;
     // destroy window
     SDL_DestroyWindow(gWindow);
     gWindow = NULL;
@@ -99,7 +100,7 @@ int main( int argc, char* args[] ) {
     } else if (!loadMedia()) {
         printf("Failure during executing media files %s\n", SDL_GetError());
     } else {
-        SDL_BlitSurface(gBackground, NULL, gScreenSurface, NULL);
+        SDL_BlitSurface(gCurrentSurface, NULL, gScreenSurface, NULL);
         // update surface
         SDL_UpdateWindowSurface(gWindow);
 
@@ -111,7 +112,7 @@ int main( int argc, char* args[] ) {
             while(SDL_PollEvent(&e)) {
                 if(e.type == SDL_QUIT) {
                     quit = true;
-                } else if( e.type == SDLK_DOWN ) {
+                } else if( e.type == SDL_KEYDOWN ) {
                     switch ( e.key.keysym.sym ) {
                         case SDLK_UP:
                             gCurrentSurface = gKeySurfacePresses[ KEY_SURFACE_PRESS_UP ];
@@ -124,6 +125,9 @@ int main( int argc, char* args[] ) {
                             break;
                         case SDLK_DOWN:
                             gCurrentSurface = gKeySurfacePresses[ KEY_SURFACE_PRESS_DOWN ];
+                            break;
+                        default:
+                            gCurrentSurface = gKeySurfacePresses[ KEY_SURFACE_PRESS_DEFAULT ];
                             break;
                     }
                 }
