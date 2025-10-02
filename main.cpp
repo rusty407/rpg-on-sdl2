@@ -20,7 +20,8 @@ SDL_Surface* gScreenSurface = NULL;
 SDL_Surface* gBackground = NULL;
 SDL_Surface* gKeySurfacePresses[ KEY_SURFACE_PRESS_TOTAL ];
 SDL_Surface* gCurentSurface = NULL;
- 
+SDL_Surface* loadSurface( std::string path );
+
 // with this function we initialize creation of window in SDL
 bool init() {
    bool success = true; 
@@ -39,24 +40,42 @@ bool init() {
    return success; // return success cuz we got boolean value over there so function needs to know return is true of false to execute
 }
 
+// load media where i created what happenes if someone clicks specific key on the keyboard
 bool loadMedia() {
     bool success = true;
     // default image
-    gKeySurfacePresses[ SDL_SURFACE_PRESS_DEFAULT ] = loadSurface("/home/console/Documents/sdl-project/rpg_on_sdl2/map.bmp");
-    if(gKeySurfacePresses[ SDL_SURFACE_PRESS_DEFAULT ] = NULL) {
+    gKeySurfacePresses[ KEY_SURFACE_PRESS_DEFAULT ] = loadSurface("/home/console/Documents/sdl-project/rpg_on_sdl2/bmp_files/map.bmp");
+    if(gKeySurfacePresses[ KEY_SURFACE_PRESS_DEFAULT ] == NULL) {
         printf("failed to load image: %s\n", SDL_GetError());
         success = false;
     }
     // on pressing up button
-    gKeySurfacePresses[ SDL_SURFACE_PRESS_UP ] = loadSurface("/home/console/Documents/sdl-project/rpg_on_sdl2/guy.bmp");
-    if(gKeySurfacePresses[ SDL_SURFACE_PRESS_UP ] = NULL) {
+    gKeySurfacePresses[ KEY_SURFACE_PRESS_UP ] = loadSurface("/home/console/Documents/sdl-project/rpg_on_sdl2/bmp_files/guy.bmp");
+    if(gKeySurfacePresses[ KEY_SURFACE_PRESS_UP ] == NULL) {
+        printf("failed to load image: %s\n", SDL_GetError());
+        success = false;
+    }
+    
+    gKeySurfacePresses[ KEY_SURFACE_PRESS_LEFT ] = loadSurface("/home/console/Documents/sdl-project/rpg_on_sdl2/bmp_files/vectoraith_tileset_farmingsims_terrain_fall_expanded.bmp");
+    if(gKeySurfacePresses[ KEY_SURFACE_PRESS_LEFT ] == NULL) {
+        printf("failed to load image: %s\n", SDL_GetError());
+        success = false;
+    }
+    
+    gKeySurfacePresses[ KEY_SURFACE_PRESS_RIGHT ] = loadSurface("/home/console/Documents/sdl-project/rpg_on_sdl2/bmp_files/guy.bmp");
+    if(gKeySurfacePresses[ KEY_SURFACE_PRESS_RIGHT ] == NULL) {
+        printf("failed to load image: %s\n", SDL_GetError());
+        success = false;
+    }
+
+    gKeySurfacePresses[ KEY_SURFACE_PRESS_DOWN ] = loadSurface("/home/console/Documents/sdl-project/rpg_on_sdl2/bmp_files/guy.bmp");
+    if(gKeySurfacePresses[ KEY_SURFACE_PRESS_DOWN ] == NULL) {
         printf("failed to load image: %s\n", SDL_GetError());
         success = false;
     }
 }
 
 // removes handwritten SDL_LoadBMP
-
 SDL_Surface* loadSurface( std::string path ) {
     SDL_Surface* loadedSurface = SDL_LoadBMP( path.c_str() );
     if(loadedSurface == NULL) {
@@ -74,6 +93,7 @@ void close() {
     gWindow = NULL;
 }
 
+// game loop
 int main( int argc, char* args[] ) {
     if(!init()) {
         printf("Failure during executing program: %s\n", SDL_GetError());
@@ -83,13 +103,17 @@ int main( int argc, char* args[] ) {
         SDL_BlitSurface(gBackground, NULL, gScreenSurface, NULL);
         // update surface
         SDL_UpdateWindowSurface(gWindow);
+
         // don't close before i click the close button
-        SDL_Event e;
         bool quit = false;
+        SDL_Event e;
+        gCurrentSurface = gKeySurfacePresses[ KEY_SURFACE_PRESS_DEFAULT ];
         while(!quit) {
             while(SDL_PollEvent(&e)) {
                 if(e.type == SDL_QUIT) {
                     quit = true;
+                } else if( e.type == SDL_DOWN ) {
+                    // need to add keypresses so when someone presses a key it updates from loadMedia() and updates it;
                 }
             }
         }
