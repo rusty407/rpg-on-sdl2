@@ -41,14 +41,21 @@ bool init() {
 
 bool loadMedia() {
     bool success = true;
-    const char* myImage = "/home/console/Documents/sdl-project/rpg_on_sdl2/map.bmp";
-    gBackground = SDL_LoadBMP(myImage);
-    if(gBackground == NULL) {
-        printf("Failed to initialize media because of: %s\n", myImage, SDL_GetError());
+    // default image
+    gKeySurfacePresses[ SDL_SURFACE_PRESS_DEFAULT ] = loadSurface("/home/console/Documents/sdl-project/rpg_on_sdl2/map.bmp");
+    if(gKeySurfacePresses[ SDL_SURFACE_PRESS_DEFAULT ] = NULL) {
+        printf("failed to load image: %s\n", SDL_GetError());
         success = false;
-    } 
-    return success;
-}; 
+    }
+    // on pressing up button
+    gKeySurfacePresses[ SDL_SURFACE_PRESS_UP ] = loadSurface("/home/console/Documents/sdl-project/rpg_on_sdl2/guy.bmp");
+    if(gKeySurfacePresses[ SDL_SURFACE_PRESS_UP ] = NULL) {
+        printf("failed to load image: %s\n", SDL_GetError());
+        success = false;
+    }
+}
+
+// removes handwritten SDL_LoadBMP
 
 SDL_Surface* loadSurface( std::string path ) {
     SDL_Surface* loadedSurface = SDL_LoadBMP( path.c_str() );
