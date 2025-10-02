@@ -56,19 +56,19 @@ bool loadMedia() {
         success = false;
     }
     
-    gKeySurfacePresses[ KEY_SURFACE_PRESS_LEFT ] = loadSurface("/home/console/Documents/sdl-project/rpg_on_sdl2/bmp_files/vectoraith_tileset_farmingsims_terrain_fall_expanded.bmp");
+    gKeySurfacePresses[ KEY_SURFACE_PRESS_LEFT ] = loadSurface("/home/console/Documents/sdl-project/rpg_on_sdl2/bmp_files/wallhaven1.bmp");
     if(gKeySurfacePresses[ KEY_SURFACE_PRESS_LEFT ] == NULL) {
         printf("failed to load image: %s\n", SDL_GetError());
         success = false;
     }
     
-    gKeySurfacePresses[ KEY_SURFACE_PRESS_RIGHT ] = loadSurface("/home/console/Documents/sdl-project/rpg_on_sdl2/bmp_files/guy.bmp");
+    gKeySurfacePresses[ KEY_SURFACE_PRESS_RIGHT ] = loadSurface("/home/console/Documents/sdl-project/rpg_on_sdl2/bmp_files/wallhaven2.bmp");
     if(gKeySurfacePresses[ KEY_SURFACE_PRESS_RIGHT ] == NULL) {
         printf("failed to load image: %s\n", SDL_GetError());
         success = false;
     }
 
-    gKeySurfacePresses[ KEY_SURFACE_PRESS_DOWN ] = loadSurface("/home/console/Documents/sdl-project/rpg_on_sdl2/bmp_files/guy.bmp");
+    gKeySurfacePresses[ KEY_SURFACE_PRESS_DOWN ] = loadSurface("/home/console/Documents/sdl-project/rpg_on_sdl2/bmp_files/wallhaven3.bmp");
     if(gKeySurfacePresses[ KEY_SURFACE_PRESS_DOWN ] == NULL) {
         printf("failed to load image: %s\n", SDL_GetError());
         success = false;
@@ -108,9 +108,9 @@ int main( int argc, char* args[] ) {
         bool quit = false;
         SDL_Event e;
         gCurrentSurface = gKeySurfacePresses[ KEY_SURFACE_PRESS_DEFAULT ];
-//        SDL_BlitSurface(gCurrentSurface, NULL, gScreenSurface, NULL);
+        SDL_BlitSurface(gCurrentSurface, NULL, gScreenSurface, NULL);
         // update surface
- //       SDL_UpdateWindowSurface(gWindow);
+        SDL_UpdateWindowSurface(gWindow);
         while(!quit) {
             while(SDL_PollEvent(&e)) {
                 if(e.type == SDL_QUIT) {
