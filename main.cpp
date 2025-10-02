@@ -73,6 +73,7 @@ bool loadMedia() {
         printf("failed to load image: %s\n", SDL_GetError());
         success = false;
     }
+    return success;
 }
 
 // removes handwritten SDL_LoadBMP
@@ -91,6 +92,8 @@ void close() {
     // destroy window
     SDL_DestroyWindow(gWindow);
     gWindow = NULL;
+
+    SDL_Quit();
 }
 
 // game loop
@@ -100,14 +103,14 @@ int main( int argc, char* args[] ) {
     } else if (!loadMedia()) {
         printf("Failure during executing media files %s\n", SDL_GetError());
     } else {
-        SDL_BlitSurface(gCurrentSurface, NULL, gScreenSurface, NULL);
-        // update surface
-        SDL_UpdateWindowSurface(gWindow);
 
         // don't close before i click the close button
         bool quit = false;
         SDL_Event e;
         gCurrentSurface = gKeySurfacePresses[ KEY_SURFACE_PRESS_DEFAULT ];
+//        SDL_BlitSurface(gCurrentSurface, NULL, gScreenSurface, NULL);
+        // update surface
+ //       SDL_UpdateWindowSurface(gWindow);
         while(!quit) {
             while(SDL_PollEvent(&e)) {
                 if(e.type == SDL_QUIT) {
@@ -130,6 +133,9 @@ int main( int argc, char* args[] ) {
                             gCurrentSurface = gKeySurfacePresses[ KEY_SURFACE_PRESS_DEFAULT ];
                             break;
                     }
+                    SDL_BlitSurface(gCurrentSurface, NULL, gScreenSurface, NULL);
+                    // update surface
+                    SDL_UpdateWindowSurface(gWindow);
                 }
             }
         }
