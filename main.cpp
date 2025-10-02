@@ -6,6 +6,10 @@
 const int SCREEN_WIDTH = 1024;
 const int SCREEN_HEIGHT = 768;
 
+SDL_Window* gWindow = NULL;
+SDL_Surface* gScreenSurface = NULL;
+SDL_Surface* loadSurface( std::string path );
+
 enum KeySurfacePresses {
     KEY_SURFACE_PRESS_DEFAULT,
     KEY_SURFACE_PRESS_LEFT,
@@ -14,13 +18,8 @@ enum KeySurfacePresses {
     KEY_SURFACE_PRESS_UP,
     KEY_SURFACE_PRESS_TOTAL
 }
-
-SDL_Window* gWindow = NULL;
-SDL_Surface* gScreenSurface = NULL;
-SDL_Surface* gBackground = NULL;
 SDL_Surface* gKeySurfacePresses[ KEY_SURFACE_PRESS_TOTAL ];
-SDL_Surface* gCurentSurface = NULL;
-SDL_Surface* loadSurface( std::string path );
+SDL_Surface* gCurrentSurface = NULL;
 
 // with this function we initialize creation of window in SDL
 bool init() {
@@ -112,8 +111,21 @@ int main( int argc, char* args[] ) {
             while(SDL_PollEvent(&e)) {
                 if(e.type == SDL_QUIT) {
                     quit = true;
-                } else if( e.type == SDL_DOWN ) {
-                    // need to add keypresses so when someone presses a key it updates from loadMedia() and updates it;
+                } else if( e.type == SDLK_DOWN ) {
+                    switch ( e.key.keysym.sym ) {
+                        case SDLK_UP:
+                            gCurrentSurface = gKeySurfacePresses[ KEY_SURFACE_PRESS_UP ];
+                            break;
+                        case SDLK_LEFT:
+                            gCurrentSurface = gKeySurfacePresses[ KEY_SURFACE_PRESS_LEFT ];
+                            break;
+                        case SDLK_RIGHT:
+                            gCurrentSurface = gKeySurfacePresses[ KEY_SURFACE_PRESS_RIGHT ];
+                            break;
+                        case SDLK_DOWN:
+                            gCurrentSurface = gKeySurfacePresses[ KEY_SURFACE_PRESS_DOWN ];
+                            break;
+                    }
                 }
             }
         }
