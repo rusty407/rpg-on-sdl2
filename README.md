@@ -42,7 +42,8 @@ This project is in active development. Expect rough edges and ongoing changes.
 1. Install SDL2:
 
 ```bash
-sudo apt install libsdl2-dev
+sudo apt install libsdl2-dev for ubuntu
+sudo pacman -S sdl2 for Arch Linux (i use arch btw)
 
 
 Clone the repo:
@@ -51,10 +52,9 @@ git clone https://github.com/your-username/your-repo-name.git
 cd your-repo-name
 
 
-Build:
+Build with (CMAKE):
 
-g++ main.cpp -o rpg_game -lSDL2
-
+make all
 
 Run:
 
