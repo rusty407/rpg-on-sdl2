@@ -67,28 +67,29 @@ sudo apt install libsdl2-dev
 
 # Arch Linux (I use Arch btw 😎)
 sudo pacman -S sdl2
+```
 📦 Clone the repo
-bash
-Copy code
+```bash
 git clone https://github.com/your-username/your-repo-name.git
 cd your-repo-name
+```
 🏗️ Build the game
-bash
-Copy code
+```bash
 make all
+```
 If you don't have a Makefile, you can manually compile:
 
-bash
-Copy code
+```bash
 g++ main.cpp -o rpg_game -lSDL2
+```
 ▶️ Run it
-bash
-Copy code
+```bash
 ./rpg_game
+```
 Make sure your .bmp image files are placed in the correct path.
 
 📁 Project Structure
-bash
+```bash
 Copy code
 /bmp_files/          # BMP image assets
 main.cpp             # Core game logic + event loop
