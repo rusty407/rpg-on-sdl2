@@ -83,7 +83,7 @@ SDL_Surface* loadSurface( std::string path ) {
     if(loadedSurface == nullptr) {
         printf("failure during loading surface and rendering image: %s\n", path.c_str(),  SDL_GetError());
     } else {
-       optimizedSurface = SDL_ConvertSurface( gScreenSurface, gScreenSurface->format, 0);
+       optimizedSurface = SDL_ConvertSurface( loadedSurface, gScreenSurface->format, 0);
        if( optimizedSurface == nullptr ) {
         printf("failed to optimize image: %s\n", path.c_str(), SDL_GetError());
        }
@@ -91,7 +91,6 @@ SDL_Surface* loadSurface( std::string path ) {
        SDL_FreeSurface( loadedSurface );
     }
     return optimizedSurface;
-    return loadedSurface;
 }
 
 void close() {
@@ -118,7 +117,7 @@ int main( int argc, char* args[] ) {
         SDL_Event e;
         gCurrentSurface = gKeySurfacePresses[ KEY_SURFACE_PRESS_DEFAULT ];
         SDL_Rect stretchRect = { 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT };
-        SDL_BlitSurface(gCurrentSurface, nullptr, gScreenSurface, &stretchRect);
+        SDL_BlitScaled(gCurrentSurface, nullptr, gScreenSurface, &stretchRect);
         // update surface
         SDL_UpdateWindowSurface(gWindow);
         while(!quit) {
