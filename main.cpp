@@ -53,31 +53,31 @@ bool init() {
 bool loadMedia() {
     bool success = true;
     // default image
-    gKeySurfacePresses[ KEY_SURFACE_PRESS_DEFAULT ] = loadSurface("/home/console/Documents/sdl-project/rpg_on_sdl2/bmp_files/map.bmp");
+    gKeySurfacePresses[ KEY_SURFACE_PRESS_DEFAULT ] = loadSurface("/home/console/Documents/sdl-project/rpg_on_sdl2/png_files/map.png");
     if(gKeySurfacePresses[ KEY_SURFACE_PRESS_DEFAULT ] == nullptr) {
         printf("failed to load image: %s\n", SDL_GetError());
         success = false;
     }
     // on pressing up button
-    gKeySurfacePresses[ KEY_SURFACE_PRESS_UP ] = loadSurface("/home/console/Documents/sdl-project/rpg_on_sdl2/bmp_files/wallhaven4.bmp");
+    gKeySurfacePresses[ KEY_SURFACE_PRESS_UP ] = loadSurface("/home/console/Documents/sdl-project/rpg_on_sdl2/png_files/wallhaven4.png");
     if(gKeySurfacePresses[ KEY_SURFACE_PRESS_UP ] == nullptr) {
         printf("failed to load image: %s\n", SDL_GetError());
         success = false;
     }
     
-    gKeySurfacePresses[ KEY_SURFACE_PRESS_LEFT ] = loadSurface("/home/console/Documents/sdl-project/rpg_on_sdl2/bmp_files/wallhaven1.bmp");
+    gKeySurfacePresses[ KEY_SURFACE_PRESS_LEFT ] = loadSurface("/home/console/Documents/sdl-project/rpg_on_sdl2/png_files/wallhaven1.png");
     if(gKeySurfacePresses[ KEY_SURFACE_PRESS_LEFT ] == nullptr) {
         printf("failed to load image: %s\n", SDL_GetError());
         success = false;
     }
     
-    gKeySurfacePresses[ KEY_SURFACE_PRESS_RIGHT ] = loadSurface("/home/console/Documents/sdl-project/rpg_on_sdl2/bmp_files/wallhaven2.bmp");
+    gKeySurfacePresses[ KEY_SURFACE_PRESS_RIGHT ] = loadSurface("/home/console/Documents/sdl-project/rpg_on_sdl2/png_files/wallhaven2.png");
     if(gKeySurfacePresses[ KEY_SURFACE_PRESS_RIGHT ] == nullptr) {
         printf("failed to load image: %s\n", SDL_GetError());
         success = false;
     }
 
-    gKeySurfacePresses[ KEY_SURFACE_PRESS_DOWN ] = loadSurface("/home/console/Documents/sdl-project/rpg_on_sdl2/bmp_files/wallhaven3.bmp");
+    gKeySurfacePresses[ KEY_SURFACE_PRESS_DOWN ] = loadSurface("/home/console/Documents/sdl-project/rpg_on_sdl2/png_files/wallhaven3.png");
     if(gKeySurfacePresses[ KEY_SURFACE_PRESS_DOWN ] == nullptr) {
         printf("failed to load image: %s\n", SDL_GetError());
         success = false;
