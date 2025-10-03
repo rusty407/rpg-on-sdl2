@@ -50,7 +50,7 @@ bool loadMedia() {
         success = false;
     }
     // on pressing up button
-    gKeySurfacePresses[ KEY_SURFACE_PRESS_UP ] = loadSurface("/home/console/Documents/sdl-project/rpg_on_sdl2/bmp_files/guy.bmp");
+    gKeySurfacePresses[ KEY_SURFACE_PRESS_UP ] = loadSurface("/home/console/Documents/sdl-project/rpg_on_sdl2/bmp_files/wallhaven4.bmp");
     if(gKeySurfacePresses[ KEY_SURFACE_PRESS_UP ] == NULL) {
         printf("failed to load image: %s\n", SDL_GetError());
         success = false;
