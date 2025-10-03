@@ -1,83 +1,107 @@
-# 2D RPG Game (WIP)
+# 🎮 2D RPG Game Engine (WIP)
 
-A 2D RPG game and engine built in C++ using [SDL2](https://www.libsdl.org/).  
-Currently in **early development**, focused on learning game programming fundamentals and building a simple engine from the ground up.
+A **2D RPG game and engine** built with **C++** and **[SDL2](https://www.libsdl.org/)**.  
+Currently in **early development**, focused on learning game development fundamentals and building a lightweight, custom engine from the ground up.
+
+---
 
 ## 🚧 Project Status
 
-🛠️ Work in Progress  
-This project is in active development. Expect rough edges and ongoing changes.
+🛠️ **In Progress**  
+This project is under active development. Expect rapid changes, work-in-progress features, and learning-driven code.
 
-## 🎮 Goals
+---
 
-- Build a 2D RPG game with tile-based movement
-- Design a lightweight 2D engine to handle:
+## 🧠 Why I'm Building This
+
+- To understand how 2D games and engines work under the hood
+- To learn SDL2 and low-level graphics programming in C++
+- To build something playable and expandable from scratch
+
+---
+
+## 🎯 Core Goals
+
+- Tile-based RPG gameplay
+- Lightweight 2D engine handling:
   - Rendering (maps, sprites)
-  - Input (keyboard controls)
-  - Surface optimization and scaling
-  - Basic game loop and state management
-- Learn low-level SDL concepts and C++ memory management
+  - Input (keyboard)
+  - Surface optimization & stretching
+  - Game loop + state management
+
+---
 
 ## ✨ Current Features
 
-- Window creation using SDL2
-- Input handling (arrow key events)
-- Image loading and rendering (BMP format)
-- Surface optimization and full-screen stretching
-- Switching between images on key press
+- ✅ SDL2 window creation
+- ✅ Input handling (arrow keys)
+- ✅ BMP image loading and rendering
+- ✅ Surface optimization to match screen format
+- ✅ Fullscreen image scaling with `SDL_BlitScaled`
+- ✅ Switching scenes/images with key presses
+
+---
 
 ## 🧱 Planned Features
 
-- Tile map loading and rendering
-- Player character movement
-- Collision detection
-- NPC interaction
-- Simple scripting or event system
-- Save/load support
+- [ ] Tile map loading + rendering
+- [ ] Player character movement
+- [ ] Collision detection
+- [ ] NPC interaction
+- [ ] Event/scripting system
+- [ ] Save/load game state
+- [ ] Audio (SFX + BGM)
 
-## 🖥️ Build Instructions
+---
 
-> 🐧 Linux instructions shown. Adjust paths and package names for your OS.
+## 🛠️ Build & Run Instructions
 
-1. Install SDL2:
+> 🐧 Linux-based instructions (tested on Arch & Ubuntu)  
+> ✅ Requires SDL2 development libraries
+
+### 🔧 Install SDL2
 
 ```bash
-sudo apt install libsdl2-dev for ubuntu
-sudo pacman -S sdl2 for Arch Linux (i use arch btw)
+# Ubuntu/Debian:
+sudo apt install libsdl2-dev
 
-
-Clone the repo:
-
+# Arch Linux (I use Arch btw 😎)
+sudo pacman -S sdl2
+📦 Clone the repo
+bash
+Copy code
 git clone https://github.com/your-username/your-repo-name.git
 cd your-repo-name
-
-
-Build:
-
+🏗️ Build the game
+bash
+Copy code
 make all
+If you don't have a Makefile, you can manually compile:
 
-Run:
-
+bash
+Copy code
+g++ main.cpp -o rpg_game -lSDL2
+▶️ Run it
+bash
+Copy code
 ./rpg_game
-
-
-Make sure your BMP image files are in the correct paths.
+Make sure your .bmp image files are placed in the correct path.
 
 📁 Project Structure
-/bmp_files/         # Contains .bmp images used in the game
-main.cpp            # Main game loop and logic
-README.md           # You're reading it!
+bash
+Copy code
+/bmp_files/          # BMP image assets
+main.cpp             # Core game logic + event loop
+README.md            # You're reading it!
+Makefile             # (Optional) Build script
 ```
-🧠 Why I'm Building This
+## ✨ Contributions
+This is a personal learning project — but feedback, ideas, and suggestions are always welcome.
 
-I’m building this project to:
+Open an issue or start a discussion if you’d like to contribute or ask questions.
 
-Understand how 2D games and 2D game engines work under the hood
+## ✨ License
+Feel free to add a license here (MIT is common for open learning projects).
 
-Learn low-level C++ and SDL graphics
-
-Create something playable and expandable
-
-🙌 Contributions
-
-Right now this is a personal learning project, but feedback or ideas are always welcome. Feel free to open an issue or suggest something!
+## ✨ Coming Soon...
+Screenshots, engine structure docs, and dev logs as progress continues!
