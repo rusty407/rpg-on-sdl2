@@ -1,37 +1,21 @@
-# OBJS specifies which files to compile
-OBJS = main.o 
+# OBJS specifies which files to compile as part of the project
+OBJS = main.cpp
 
-# CC specifies the compiler
+# CC specifies which compiler we're using
 CC = g++
 
-# COMPILER_FLAGS specifies compilation options
-# -w suppresses warnings, pkg-config provides SDL2 include paths
-COMPILER_FLAGS = -w $(shell pkg-config --cflags sdl2)
+# COMPILER_FLAGS specifies the additional compilation options we're using
+# -w suppresses all warnings
+# -I/usr/include/SDL2 adds the include path for SDL2 headers
+COMPILER_FLAGS = -w -I/usr/include/SDL2
 
-# LINKER_FLAGS specifies libraries to link
-LINKER_FLAGS = $(shell pkg-config --libs sdl2)
+# LINKER_FLAGS specifies the libraries we're linking against
+LINKER_FLAGS = -lSDL2 -lSDL2_image
 
-# OBJ_NAME specifies the name of the executable
+# OBJ_NAME specifies the name of our executable
 OBJ_NAME = output 
 
-# Default target to build the executable
-all: $(OBJ_NAME)
+# This is the target that compiles our executable
+all : $(OBJS)
+	$(CC) $(OBJS) $(COMPILER_FLAGS) $(LINKER_FLAGS) -o $(OBJ_NAME)
 
-# Link object files to create the executable
-$(OBJ_NAME): $(OBJS)
-	$(CC) $(OBJS) $(LINKER_FLAGS) -o $(OBJ_NAME)
-
-# Compile source files to object files
-%.o: %.cpp
-	$(CC) $(COMPILER_FLAGS) -c $< -o $@
-
-# Clean up generated files
-clean:
-	rm -f $(OBJS) $(OBJ_NAME)
-
-# Placeholder for install (no system-wide install needed)
-install:
-	@echo "No system-wide install needed for this example"
-
-# Phony targets
-.PHONY: all clean install

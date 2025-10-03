@@ -1,10 +1,13 @@
+// vectoraith_tileset_farmingsims_buildings.png         vectoraith_tileset_farmingsims_details.png                vectoraith_tileset_farmingsims_terrain_spring_expanded.png
+// vectoraith_tileset_farmingsims_buildings_winter.png  vectoraith_tileset_farmingsims_orchard.png
 #include <SDL.h>
-#include <cstddef>
+#include <SDL_image.h>
+// #include <cstddef>
 #include <stdio.h>
 #include <string>
 
-const int SCREEN_WIDTH = 1920;
-const int SCREEN_HEIGHT = 1200;
+const int SCREEN_WIDTH = 1280;
+const int SCREEN_HEIGHT = 960;
 
 SDL_Window* gWindow = nullptr;
 SDL_Surface* gScreenSurface = nullptr;
@@ -34,8 +37,14 @@ bool init() {
             printf("Window creation was failed because of: %s\n", SDL_GetError());
             success = false;
        } else {
-            gScreenSurface = SDL_GetWindowSurface(gWindow);
-       }
+           int imgFlags = IMG_INIT_PNG;
+           if( !IMG_Init(imgFlags) & imgFlags ) {
+               printf("couldn't initialize the png file: %s\n", SDL_GetError());
+               success = false;
+            } else {
+                gScreenSurface = SDL_GetWindowSurface(gWindow);
+            }
+        }
    }
    return success; // return success cuz we got boolean value over there so function needs to know return is true of false to execute
 }
@@ -78,10 +87,10 @@ bool loadMedia() {
 
 // load the image on the surface and replaces handwritten const char* myImage 
 SDL_Surface* loadSurface( std::string path ) {
-    SDL_Surface* loadedSurface = SDL_LoadBMP( path.c_str() );
+    SDL_Surface* loadedSurface = IMG_Load( path.c_str() );
     SDL_Surface* optimizedSurface = nullptr; // set it to the null cuz we dont use it for right now until else function
     if(loadedSurface == nullptr) {
-        printf("failure during loading surface and rendering image: %s\n", path.c_str(),  SDL_GetError());
+        printf("failure during loading surface and rendering image: %s\n", path.c_str(),  IMG_GetError());
     } else {
        optimizedSurface = SDL_ConvertSurface( loadedSurface, gScreenSurface->format, 0);
        if( optimizedSurface == nullptr ) {
