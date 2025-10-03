@@ -3,11 +3,11 @@
 #include <stdio.h>
 #include <string>
 
-const int SCREEN_WIDTH = 1024;
-const int SCREEN_HEIGHT = 768;
+const int SCREEN_WIDTH = 1920;
+const int SCREEN_HEIGHT = 1200;
 
-SDL_Window* gWindow = NULL;
-SDL_Surface* gScreenSurface = NULL;
+SDL_Window* gWindow = nullptr;
+SDL_Surface* gScreenSurface = nullptr;
 SDL_Surface* loadSurface( std::string path );
 
 enum KeySurfacePresses {
@@ -20,7 +20,7 @@ enum KeySurfacePresses {
 }; // pls don't forget semicolon after enum took me decades to debug
 
 SDL_Surface* gKeySurfacePresses[ KEY_SURFACE_PRESS_TOTAL ];
-SDL_Surface* gCurrentSurface = NULL;
+SDL_Surface* gCurrentSurface = nullptr;
 
 // with this function we initialize creation of window in SDL
 bool init() {
@@ -30,7 +30,7 @@ bool init() {
         success = false;
    } else {
        gWindow = SDL_CreateWindow("rpg_game", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN); // title, default pos, def pos, swidth, sheight, window_shown
-       if (gWindow == NULL) {
+       if (gWindow == nullptr) {
             printf("Window creation was failed because of: %s\n", SDL_GetError());
             success = false;
        } else {
@@ -45,41 +45,41 @@ bool loadMedia() {
     bool success = true;
     // default image
     gKeySurfacePresses[ KEY_SURFACE_PRESS_DEFAULT ] = loadSurface("/home/console/Documents/sdl-project/rpg_on_sdl2/bmp_files/map.bmp");
-    if(gKeySurfacePresses[ KEY_SURFACE_PRESS_DEFAULT ] == NULL) {
+    if(gKeySurfacePresses[ KEY_SURFACE_PRESS_DEFAULT ] == nullptr) {
         printf("failed to load image: %s\n", SDL_GetError());
         success = false;
     }
     // on pressing up button
     gKeySurfacePresses[ KEY_SURFACE_PRESS_UP ] = loadSurface("/home/console/Documents/sdl-project/rpg_on_sdl2/bmp_files/wallhaven4.bmp");
-    if(gKeySurfacePresses[ KEY_SURFACE_PRESS_UP ] == NULL) {
+    if(gKeySurfacePresses[ KEY_SURFACE_PRESS_UP ] == nullptr) {
         printf("failed to load image: %s\n", SDL_GetError());
         success = false;
     }
     
     gKeySurfacePresses[ KEY_SURFACE_PRESS_LEFT ] = loadSurface("/home/console/Documents/sdl-project/rpg_on_sdl2/bmp_files/wallhaven1.bmp");
-    if(gKeySurfacePresses[ KEY_SURFACE_PRESS_LEFT ] == NULL) {
+    if(gKeySurfacePresses[ KEY_SURFACE_PRESS_LEFT ] == nullptr) {
         printf("failed to load image: %s\n", SDL_GetError());
         success = false;
     }
     
     gKeySurfacePresses[ KEY_SURFACE_PRESS_RIGHT ] = loadSurface("/home/console/Documents/sdl-project/rpg_on_sdl2/bmp_files/wallhaven2.bmp");
-    if(gKeySurfacePresses[ KEY_SURFACE_PRESS_RIGHT ] == NULL) {
+    if(gKeySurfacePresses[ KEY_SURFACE_PRESS_RIGHT ] == nullptr) {
         printf("failed to load image: %s\n", SDL_GetError());
         success = false;
     }
 
     gKeySurfacePresses[ KEY_SURFACE_PRESS_DOWN ] = loadSurface("/home/console/Documents/sdl-project/rpg_on_sdl2/bmp_files/wallhaven3.bmp");
-    if(gKeySurfacePresses[ KEY_SURFACE_PRESS_DOWN ] == NULL) {
+    if(gKeySurfacePresses[ KEY_SURFACE_PRESS_DOWN ] == nullptr) {
         printf("failed to load image: %s\n", SDL_GetError());
         success = false;
     }
     return success;
 }
 
-// removes handwritten SDL_LoadBMP
+// load the image on the surface and replaces handwritten const char* myImage 
 SDL_Surface* loadSurface( std::string path ) {
     SDL_Surface* loadedSurface = SDL_LoadBMP( path.c_str() );
-    if(loadedSurface == NULL) {
+    if(loadedSurface == nullptr) {
         printf("failure during loading surface and rendering image: %s\n", path.c_str(),  SDL_GetError());
     } 
     return loadedSurface;
@@ -88,10 +88,10 @@ SDL_Surface* loadSurface( std::string path ) {
 void close() {
     // delocate surface
     SDL_FreeSurface(gCurrentSurface);
-    gCurrentSurface = NULL;
+    gCurrentSurface = nullptr;
     // destroy window
     SDL_DestroyWindow(gWindow);
-    gWindow = NULL;
+    gWindow = nullptr;
 
     SDL_Quit();
 }
@@ -108,7 +108,7 @@ int main( int argc, char* args[] ) {
         bool quit = false;
         SDL_Event e;
         gCurrentSurface = gKeySurfacePresses[ KEY_SURFACE_PRESS_DEFAULT ];
-        SDL_BlitSurface(gCurrentSurface, NULL, gScreenSurface, NULL);
+        SDL_BlitSurface(gCurrentSurface, nullptr, gScreenSurface, nullptr);
         // update surface
         SDL_UpdateWindowSurface(gWindow);
         while(!quit) {
@@ -133,7 +133,7 @@ int main( int argc, char* args[] ) {
                             gCurrentSurface = gKeySurfacePresses[ KEY_SURFACE_PRESS_DEFAULT ];
                             break;
                     }
-                    SDL_BlitSurface(gCurrentSurface, NULL, gScreenSurface, NULL);
+                    SDL_BlitSurface(gCurrentSurface, nullptr, gScreenSurface, nullptr);
                     // update surface
                     SDL_UpdateWindowSurface(gWindow);
                 }
