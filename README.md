@@ -104,5 +104,7 @@ Open an issue or start a discussion if you’d like to contribute or ask questio
 ## ✨ License
 Feel free to add a license here (MIT is common for open learning projects).
 
-## ✨ Coming Soon...
+## ✨ Videos and Screenshots...
 Screenshots, engine structure docs, and dev logs as progress continues!
+
+[![Watch the video](https://img.youtube.com/vi/UrxTx6m70TE/hqdefault.jpg)](https://www.youtube.com/watch?v=UrxTx6m70TE)
