@@ -1,4 +1,3 @@
-// just testing the branch and commit errors nothing special
 #include <SDL.h>
 #include <SDL_image.h>
 // #include <cstddef>
@@ -73,19 +72,19 @@ bool loadMedia() {
         printf("failed to load image: %s\n", SDL_GetError());
         success = false;
     }
-    
+    // on pressing left button
     gKeySurfacePresses[ KEY_SURFACE_PRESS_LEFT ] = loadTexture("/home/console/Documents/sdl-project/rpg_on_sdl2/png_files/wallhaven1.png");
     if(gKeySurfacePresses[ KEY_SURFACE_PRESS_LEFT ] == nullptr) {
         printf("failed to load image: %s\n", SDL_GetError());
         success = false;
     }
-    
+    // on pressing right button
     gKeySurfacePresses[ KEY_SURFACE_PRESS_RIGHT ] = loadTexture("/home/console/Documents/sdl-project/rpg_on_sdl2/png_files/wallhaven2.png");
     if(gKeySurfacePresses[ KEY_SURFACE_PRESS_RIGHT ] == nullptr) {
         printf("failed to load image: %s\n", SDL_GetError());
         success = false;
     }
-
+    // on pressing down button
     gKeySurfacePresses[ KEY_SURFACE_PRESS_DOWN ] = loadTexture("/home/console/Documents/sdl-project/rpg_on_sdl2/png_files/wallhaven3.png");
     if(gKeySurfacePresses[ KEY_SURFACE_PRESS_DOWN ] == nullptr) {
         printf("failed to load image: %s\n", SDL_GetError());
@@ -109,6 +108,7 @@ SDL_Texture* loadTexture( std::string path ) {
        // remove the old surface
        SDL_FreeSurface( loadedSurface );
     }
+    // updates and return the image
     return newTexture;
 }
 
