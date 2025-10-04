@@ -4,14 +4,11 @@
 #include <stdio.h>
 #include <string>
 
-const int SCREEN_WIDTH = 1024;
-const int SCREEN_HEIGHT = 768;
+const int SCREEN_WIDTH = 1920;
+const int SCREEN_HEIGHT = 1200;
 
 SDL_Window* gWindow = nullptr;
-SDL_Surface* gScreenSurface = nullptr;
-
 SDL_Texture* loadTexture( std::string path );
-
 SDL_Renderer* gRenderer = nullptr;
 SDL_Texture* gTexture = nullptr; 
 
@@ -48,8 +45,6 @@ bool init() {
                 if( !IMG_Init(imgFlags) & imgFlags ) {
                     printf("couldn't initialize the png file: %s\n", SDL_GetError());
                     success = false;
-                } else {
-                    gScreenSurface = SDL_GetWindowSurface(gWindow);
                 }
             }
         }
@@ -133,14 +128,10 @@ int main( int argc, char* args[] ) {
     } else if (!loadMedia()) {
         printf("Failure during executing media files %s\n", SDL_GetError());
     } else {
-
         // don't close before i click the close button
         bool quit = false;
         SDL_Event e;
         gCurrentTexture = gKeySurfacePresses[ KEY_SURFACE_PRESS_DEFAULT ];
-      //SDL_BlitScaled(gCurrentTexture, nullptr, gScreenSurface, &stretchRect);
-        // update surface
-        SDL_UpdateWindowSurface(gWindow);
         while(!quit) {
             while(SDL_PollEvent(&e)) {
                 if(e.type == SDL_QUIT) {
@@ -163,10 +154,11 @@ int main( int argc, char* args[] ) {
                             gCurrentTexture = gKeySurfacePresses[ KEY_SURFACE_PRESS_DEFAULT ];
                             break;
                     }
+                    SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
                     // clears screen
                     SDL_RenderClear(gRenderer);
                     // render texture on canvas
-                    SDL_RenderCopy( gRenderer, gTexture, nullptr, nullptr);
+                    SDL_RenderCopy( gRenderer, gCurrentTexture, nullptr, nullptr);
                     // update screen
                     SDL_RenderPresent(gRenderer);
                 }
