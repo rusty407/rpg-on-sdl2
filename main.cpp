@@ -1,5 +1,3 @@
-// vectoraith_tileset_farmingsims_buildings.png         vectoraith_tileset_farmingsims_details.png                vectoraith_tileset_farmingsims_terrain_spring_expanded.png
-// vectoraith_tileset_farmingsims_buildings_winter.png  vectoraith_tileset_farmingsims_orchard.png
 #include <SDL.h>
 #include <SDL_image.h>
 // #include <cstddef>
