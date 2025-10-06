@@ -4,8 +4,8 @@
 #include <stdio.h>
 #include <string>
 
-const int SCREEN_WIDTH = 1920;
-const int SCREEN_HEIGHT = 1200;
+const int SCREEN_WIDTH = 1280;
+const int SCREEN_HEIGHT = 960;
 
 SDL_Window* gWindow = nullptr;
 SDL_Texture* loadTexture( std::string path );
@@ -61,30 +61,30 @@ bool loadMedia() {
         printf("failed to load image: %s\n", SDL_GetError());
         success = false;
     }
-    // on pressing up button
+    // // on pressing up button
     gKeySurfacePresses[ KEY_SURFACE_PRESS_UP ] = loadTexture("/home/console/Documents/sdl-project/rpg_on_sdl2/png_files/wallhaven4.png");
     if(gKeySurfacePresses[ KEY_SURFACE_PRESS_UP ] == nullptr) {
         printf("failed to load image: %s\n", SDL_GetError());
         success = false;
     }
-    // on pressing left button
-    gKeySurfacePresses[ KEY_SURFACE_PRESS_LEFT ] = loadTexture("/home/console/Documents/sdl-project/rpg_on_sdl2/png_files/wallhaven1.png");
-    if(gKeySurfacePresses[ KEY_SURFACE_PRESS_LEFT ] == nullptr) {
-        printf("failed to load image: %s\n", SDL_GetError());
-        success = false;
-    }
-    // on pressing right button
-    gKeySurfacePresses[ KEY_SURFACE_PRESS_RIGHT ] = loadTexture("/home/console/Documents/sdl-project/rpg_on_sdl2/png_files/wallhaven2.png");
-    if(gKeySurfacePresses[ KEY_SURFACE_PRESS_RIGHT ] == nullptr) {
-        printf("failed to load image: %s\n", SDL_GetError());
-        success = false;
-    }
-    // on pressing down button
-    gKeySurfacePresses[ KEY_SURFACE_PRESS_DOWN ] = loadTexture("/home/console/Documents/sdl-project/rpg_on_sdl2/png_files/wallhaven3.png");
-    if(gKeySurfacePresses[ KEY_SURFACE_PRESS_DOWN ] == nullptr) {
-        printf("failed to load image: %s\n", SDL_GetError());
-        success = false;
-    }
+    // // on pressing left button
+    // gKeySurfacePresses[ KEY_SURFACE_PRESS_LEFT ] = loadTexture("/home/console/Documents/sdl-project/rpg_on_sdl2/png_files/wallhaven1.png");
+    // if(gKeySurfacePresses[ KEY_SURFACE_PRESS_LEFT ] == nullptr) {
+    //     printf("failed to load image: %s\n", SDL_GetError());
+    //     success = false;
+    // }
+    // // on pressing right button
+    // gKeySurfacePresses[ KEY_SURFACE_PRESS_RIGHT ] = loadTexture("/home/console/Documents/sdl-project/rpg_on_sdl2/png_files/wallhaven2.png");
+    // if(gKeySurfacePresses[ KEY_SURFACE_PRESS_RIGHT ] == nullptr) {
+    //     printf("failed to load image: %s\n", SDL_GetError());
+    //     success = false;
+    // }
+    // // on pressing down button
+    // gKeySurfacePresses[ KEY_SURFACE_PRESS_DOWN ] = loadTexture("/home/console/Documents/sdl-project/rpg_on_sdl2/png_files/wallhaven3.png");
+    // if(gKeySurfacePresses[ KEY_SURFACE_PRESS_DOWN ] == nullptr) {
+    //     printf("failed to load image: %s\n", SDL_GetError());
+    //     success = false;
+    // }
     return success;
 }
 
@@ -141,15 +141,15 @@ int main( int argc, char* args[] ) {
                         case SDLK_UP:
                             gCurrentTexture = gKeySurfacePresses[ KEY_SURFACE_PRESS_UP ];
                             break;
-                        case SDLK_LEFT:
-                            gCurrentTexture = gKeySurfacePresses[ KEY_SURFACE_PRESS_LEFT ];
-                            break;
-                        case SDLK_RIGHT:
-                            gCurrentTexture = gKeySurfacePresses[ KEY_SURFACE_PRESS_RIGHT ];
-                            break;
-                        case SDLK_DOWN:
-                            gCurrentTexture = gKeySurfacePresses[ KEY_SURFACE_PRESS_DOWN ];
-                            break;
+                        // case SDLK_LEFT:
+                        //     gCurrentTexture = gKeySurfacePresses[ KEY_SURFACE_PRESS_LEFT ];
+                        //     break;
+                        // case SDLK_RIGHT:
+                        //     gCurrentTexture = gKeySurfacePresses[ KEY_SURFACE_PRESS_RIGHT ];
+                        //     break;
+                        // case SDLK_DOWN:
+                        //     gCurrentTexture = gKeySurfacePresses[ KEY_SURFACE_PRESS_DOWN ];
+                        //     break;
                         default:
                             gCurrentTexture = gKeySurfacePresses[ KEY_SURFACE_PRESS_DEFAULT ];
                             break;
