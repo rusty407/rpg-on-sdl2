@@ -158,7 +158,7 @@ int main( int argc, char* args[] ) {
                 //     // }
                 // }
             }
-            SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
+            SDL_SetRenderDrawColor( gRenderer, 0xA6, 0x88, 0x81, 0xFF);
             // clears screen
             SDL_RenderClear(gRenderer);
             // render texture on canvas
@@ -177,6 +177,11 @@ int main( int argc, char* args[] ) {
 
             SDL_SetRenderDrawColor( gRenderer, 0x00, 0x00, 0xFF, 0xFF);
             SDL_RenderDrawLine( gRenderer, 0, SCREEN_HEIGHT / 2, SCREEN_WIDTH, SCREEN_HEIGHT / 2 );
+
+            SDL_SetRenderDrawColor(gRenderer, 0x00, 0x12, 0x83, 0x71);
+            for(int i = 0; i < SCREEN_HEIGHT; i += 4){
+                SDL_RenderDrawPoint( gRenderer, SCREEN_WIDTH / 2, i);
+            }
 
             SDL_RenderPresent(gRenderer);
         }
