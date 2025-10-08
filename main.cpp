@@ -39,7 +39,8 @@ bool init() {
             gRenderer = SDL_CreateRenderer( gWindow, -1, SDL_RENDERER_ACCELERATED );
             if(gRenderer == nullptr) {
                 printf("failed to created renderer because: %s\n", SDL_GetError());
-            } else {
+            } 
+            else {
                 SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
                 int imgFlags = IMG_INIT_PNG;
                 if( !IMG_Init(imgFlags) & imgFlags ) {
@@ -56,17 +57,17 @@ bool init() {
 bool loadMedia() {
     bool success = true;
     // default image
-    gKeySurfacePresses[ KEY_SURFACE_PRESS_DEFAULT ] = loadTexture("/home/console/Documents/sdl-project/rpg_on_sdl2/png_files/map.png");
-    if(gKeySurfacePresses[ KEY_SURFACE_PRESS_DEFAULT ] == nullptr) {
-        printf("failed to load image: %s\n", SDL_GetError());
-        success = false;
-    }
-    // // on pressing up button
-    gKeySurfacePresses[ KEY_SURFACE_PRESS_UP ] = loadTexture("/home/console/Documents/sdl-project/rpg_on_sdl2/png_files/wallhaven4.png");
-    if(gKeySurfacePresses[ KEY_SURFACE_PRESS_UP ] == nullptr) {
-        printf("failed to load image: %s\n", SDL_GetError());
-        success = false;
-    }
+    // gKeySurfacePresses[ KEY_SURFACE_PRESS_DEFAULT ] = loadTexture("/home/console/Documents/sdl-project/rpg_on_sdl2/png_files/map.png");
+    // if(gKeySurfacePresses[ KEY_SURFACE_PRESS_DEFAULT ] == nullptr) {
+    //     printf("failed to load image: %s\n", SDL_GetError());
+    //     success = false;
+    // }
+    // // // on pressing up button
+    // gKeySurfacePresses[ KEY_SURFACE_PRESS_UP ] = loadTexture("/home/console/Documents/sdl-project/rpg_on_sdl2/png_files/wallhaven4.png");
+    // if(gKeySurfacePresses[ KEY_SURFACE_PRESS_UP ] == nullptr) {
+    //     printf("failed to load image: %s\n", SDL_GetError());
+    //     success = false;
+    // }
     // // on pressing left button
     // gKeySurfacePresses[ KEY_SURFACE_PRESS_LEFT ] = loadTexture("/home/console/Documents/sdl-project/rpg_on_sdl2/png_files/wallhaven1.png");
     // if(gKeySurfacePresses[ KEY_SURFACE_PRESS_LEFT ] == nullptr) {
@@ -89,23 +90,23 @@ bool loadMedia() {
 }
 
 // load the image on the surface and replaces handwritten const char* myImage 
-SDL_Texture* loadTexture( std::string path ) {
-    SDL_Texture* newTexture = nullptr;
-    SDL_Surface* loadedSurface = IMG_Load( path.c_str() );
- // SDL_Surface* optimizedSurface = nullptr; // set it to the null cuz we dont use it for right now until else function
-    if(loadedSurface == nullptr) {
-        printf("failure during loading surface and rendering image: %s\n", path.c_str(),  IMG_GetError());
-    } else {
-        newTexture = SDL_CreateTextureFromSurface( gRenderer, loadedSurface );
-        if (newTexture == nullptr) {
-            printf("failure during rendering image: %s\n", SDL_GetError());
-        }
-       // remove the old surface
-       SDL_FreeSurface( loadedSurface );
-    }
-    // updates and return the image
-    return newTexture;
-}
+// SDL_Texture* loadTexture( std::string path ) {
+//     SDL_Texture* newTexture = nullptr;
+//     SDL_Surface* loadedSurface = IMG_Load( path.c_str() );
+//  // SDL_Surface* optimizedSurface = nullptr; // set it to the null cuz we dont use it for right now until else function
+//     if(loadedSurface == nullptr) {
+//         printf("failure during loading surface and rendering image: %s\n", path.c_str(),  IMG_GetError());
+//     } else {
+//         newTexture = SDL_CreateTextureFromSurface( gRenderer, loadedSurface );
+//         if (newTexture == nullptr) {
+//             printf("failure during rendering image: %s\n", SDL_GetError());
+//         }
+//        // remove the old surface
+//        SDL_FreeSurface( loadedSurface );
+//     }
+//     // updates and return the image
+//     return newTexture;
+// }
 
 void close() {
     // delocate surface
@@ -131,38 +132,43 @@ int main( int argc, char* args[] ) {
         // don't close before i click the close button
         bool quit = false;
         SDL_Event e;
-        gCurrentTexture = gKeySurfacePresses[ KEY_SURFACE_PRESS_DEFAULT ];
+        // gCurrentTexture = gKeySurfacePresses[ KEY_SURFACE_PRESS_DEFAULT ];
         while(!quit) {
             while(SDL_PollEvent(&e)) {
                 if(e.type == SDL_QUIT) {
                     quit = true;
-                } else if( e.type == SDL_KEYDOWN ) {
-                    switch ( e.key.keysym.sym ) {
-                        case SDLK_UP:
-                            gCurrentTexture = gKeySurfacePresses[ KEY_SURFACE_PRESS_UP ];
-                            break;
-                        // case SDLK_LEFT:
-                        //     gCurrentTexture = gKeySurfacePresses[ KEY_SURFACE_PRESS_LEFT ];
-                        //     break;
-                        // case SDLK_RIGHT:
-                        //     gCurrentTexture = gKeySurfacePresses[ KEY_SURFACE_PRESS_RIGHT ];
-                        //     break;
-                        // case SDLK_DOWN:
-                        //     gCurrentTexture = gKeySurfacePresses[ KEY_SURFACE_PRESS_DOWN ];
-                        //     break;
-                        default:
-                            gCurrentTexture = gKeySurfacePresses[ KEY_SURFACE_PRESS_DEFAULT ];
-                            break;
-                    }
-                    SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
-                    // clears screen
-                    SDL_RenderClear(gRenderer);
-                    // render texture on canvas
-                    SDL_RenderCopy( gRenderer, gCurrentTexture, nullptr, nullptr);
-                    // update screen
-                    SDL_RenderPresent(gRenderer);
-                }
+                } 
+                // else if( e.type == SDL_KEYDOWN ) {
+                //     // switch ( e.key.keysym.sym ) {
+                //     //     case SDLK_UP:
+                //     //         gCurrentTexture = gKeySurfacePresses[ KEY_SURFACE_PRESS_UP ];
+                //     //         break;
+                //     //     // case SDLK_LEFT:
+                //     //     //     gCurrentTexture = gKeySurfacePresses[ KEY_SURFACE_PRESS_LEFT ];
+                //     //     //     break;
+                //     //     // case SDLK_RIGHT:
+                //     //     //     gCurrentTexture = gKeySurfacePresses[ KEY_SURFACE_PRESS_RIGHT ];
+                //     //     //     break;
+                //     //     // case SDLK_DOWN:
+                //     //     //     gCurrentTexture = gKeySurfacePresses[ KEY_SURFACE_PRESS_DOWN ];
+                //     //     //     break;
+                //     //     default:
+                //     //         gCurrentTexture = gKeySurfacePresses[ KEY_SURFACE_PRESS_DEFAULT ];
+                //     //         break;
+                //     // }
+                // }
             }
+            SDL_SetRenderDrawColor( gRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
+            // clears screen
+            SDL_RenderClear(gRenderer);
+            // render texture on canvas
+            // SDL_RenderCopy( gRenderer, gCurrentTexture, nullptr, nullptr);
+            // update screen
+            // render the cube
+            SDL_Rect fillRect = { SCREEN_WIDTH / 4, SCREEN_HEIGHT / 4, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 };
+            SDL_SetRenderDrawColor( gRenderer, 0xFF, 0x00, 0x00, 0xFF);
+            SDL_RenderFillRect( gRenderer, &fillRect );
+            SDL_RenderPresent(gRenderer);
         }
     }
     // free memory
