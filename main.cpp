@@ -4,8 +4,8 @@
 #include <stdio.h>
 #include <string>
 
-const int SCREEN_WIDTH = 1280;
-const int SCREEN_HEIGHT = 960;
+const int SCREEN_WIDTH = 1920;
+const int SCREEN_HEIGHT = 1200;
 
 SDL_Window* gWindow = nullptr;
 SDL_Texture* loadTexture( std::string path );
