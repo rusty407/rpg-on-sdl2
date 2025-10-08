@@ -175,6 +175,9 @@ int main( int argc, char* args[] ) {
             SDL_SetRenderDrawColor( gRenderer, 0x00, 0xFF, 0x00, 0xFF);
             SDL_RenderDrawRect( gRenderer, &outlineRect );
 
+            SDL_SetRenderDrawColor( gRenderer, 0x00, 0x00, 0xFF, 0xFF);
+            SDL_RenderDrawLine( gRenderer, 0, SCREEN_HEIGHT / 2, SCREEN_WIDTH, SCREEN_HEIGHT / 2 );
+
             SDL_RenderPresent(gRenderer);
         }
     }
