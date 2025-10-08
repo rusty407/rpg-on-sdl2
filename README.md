@@ -90,7 +90,6 @@ Make sure your .bmp image files are placed in the correct path.
 
 📁 Project Structure
 ```bash
-Copy code
 /bmp_files/          # BMP image assets
 main.cpp             # Core game logic + event loop
 README.md            # You're reading it!
