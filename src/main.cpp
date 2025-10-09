@@ -49,13 +49,13 @@ bool init() {
 // load media where i created what happenes if someone clicks specific key on the keyboard
 bool loadMedia() {
     bool success = true;
-    gTexture = loadTexture("/home/console/Documents/sdl-project/rpg_on_sdl2/png_files/map.png");
+    gTexture = loadTexture("/home/console/Documents/sdl-project/rpg_on_sdl2/assets/map.png");
     if(gTexture == nullptr){
         printf("can't load media into renderer: %s\n", SDL_GetError());
         success = false;
     }
 
-    gGuyTexture = loadTexture("/home/console/Documents/sdl-project/rpg_on_sdl2/png_files/guy.png");
+    gGuyTexture = loadTexture("/home/console/Documents/sdl-project/rpg_on_sdl2/assets/guy.png");
     if(gTexture == nullptr){
         printf("can't load media into renderer: %s\n", SDL_GetError());
         success = false;
@@ -117,9 +117,9 @@ int main( int argc, char* args[] ) {
             SDL_RenderClear(gRenderer);
             // render texture on canvas 
             SDL_RenderCopy( gRenderer, gCurrentTexture, nullptr, nullptr);
-           
-            SDL_Rect guyRect = { 100, 100, 55, 55};
 
+            // render guy texture
+            SDL_Rect guyRect = { 100, 100, 55, 55};
             SDL_RenderCopy( gRenderer, gGuyTexture, nullptr, &guyRect);
 
             // update screen

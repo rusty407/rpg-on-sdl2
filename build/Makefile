@@ -1,5 +1,5 @@
 # OBJS specifies which files to compile as part of the project
-OBJS = main.cpp
+OBJS = /home/console/Documents/sdl-project/rpg_on_sdl2/src/main.cpp
 
 # CC specifies which compiler we're using
 CC = g++
