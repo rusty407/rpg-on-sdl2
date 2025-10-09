@@ -4,8 +4,8 @@
 #include <stdio.h>
 #include <string>
 
-const int SCREEN_WIDTH = 1920;
-const int SCREEN_HEIGHT = 1200;
+const int SCREEN_WIDTH = 1024;
+const int SCREEN_HEIGHT = 768;
 
 SDL_Window* gWindow = nullptr;
 SDL_Texture* loadTexture( std::string path );
@@ -183,6 +183,17 @@ int main( int argc, char* args[] ) {
             for(int i = 0; i < SCREEN_HEIGHT; i += 4){
                 SDL_RenderDrawPoint( gRenderer, SCREEN_WIDTH / 2, i);
             }
+            
+            SDL_Rect topLeftViewPort;
+            topLeftViewPort.x = 0;
+            topLeftViewPort.y = 0;
+            topLeftViewPort.w = SCREEN_WIDTH / 2;
+            topLeftViewPort.h = SCREEN_HEIGHT / 2;
+
+            SDL_RenderSetViewport( gRenderer, &topLeftViewPort );
+            SDL_RenderCopy( gRenderer, gTexture, nullptr, nullptr);
+
+
             SDL_RenderPresent(gRenderer);
 
         }
