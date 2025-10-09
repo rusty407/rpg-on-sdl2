@@ -10,7 +10,10 @@ const int SCREEN_HEIGHT = 1024;
 SDL_Window* gWindow = nullptr;
 SDL_Texture* loadTexture( std::string path );
 SDL_Renderer* gRenderer = nullptr;
+
+// textures
 SDL_Texture* gTexture = nullptr; 
+SDL_Texture* gGuyTexture = nullptr; 
 
 SDL_Texture* gCurrentTexture = nullptr;
 
@@ -47,6 +50,16 @@ bool init() {
 bool loadMedia() {
     bool success = true;
     gTexture = loadTexture("/home/console/Documents/sdl-project/rpg_on_sdl2/png_files/map.png");
+    if(gTexture == nullptr){
+        printf("can't load media into renderer: %s\n", SDL_GetError());
+        success = false;
+    }
+
+    gGuyTexture = loadTexture("/home/console/Documents/sdl-project/rpg_on_sdl2/png_files/guy.png");
+    if(gTexture == nullptr){
+        printf("can't load media into renderer: %s\n", SDL_GetError());
+        success = false;
+    }
     return success;
 }
 
@@ -104,37 +117,12 @@ int main( int argc, char* args[] ) {
             SDL_RenderClear(gRenderer);
             // render texture on canvas 
             SDL_RenderCopy( gRenderer, gCurrentTexture, nullptr, nullptr);
-            // update screen
            
-            // render the cube
-            // SDL_Rect fillRect = { SCREEN_WIDTH / 4, SCREEN_HEIGHT / 4, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 };
-            // SDL_SetRenderDrawColor( gRenderer, 0xFF, 0x00, 0x00, 0xFF);
-            // SDL_RenderFillRect( gRenderer, &fillRect );
-            //
-            // // render green color
-            //
-            // SDL_Rect outlineRect= { SCREEN_WIDTH / 6, SCREEN_HEIGHT / 6, SCREEN_WIDTH * 2 / 3, SCREEN_HEIGHT * 2 / 3 };
-            // SDL_SetRenderDrawColor( gRenderer, 0x00, 0xFF, 0x00, 0xFF);
-            // SDL_RenderDrawRect( gRenderer, &outlineRect );
-            //
-            // SDL_SetRenderDrawColor( gRenderer, 0x00, 0x00, 0xFF, 0xFF);
-            // SDL_RenderDrawLine( gRenderer, 0, SCREEN_HEIGHT / 2, SCREEN_WIDTH, SCREEN_HEIGHT / 2 );
-            //
-            // SDL_SetRenderDrawColor(gRenderer, 0x00, 0x12, 0x83, 0x71);
-            // for(int i = 0; i < SCREEN_HEIGHT; i += 4){
-            //     SDL_RenderDrawPoint( gRenderer, SCREEN_WIDTH / 2, i);
-            // }
-            
-            // SDL_Rect topLeftViewPort;
-            // topLeftViewPort.x = 0;
-            // topLeftViewPort.y = 0;
-            // topLeftViewPort.w = SCREEN_WIDTH / 2;
-            // topLeftViewPort.h = SCREEN_HEIGHT / 2;
-            //
-            // SDL_RenderSetViewport( gRenderer, &topLeftViewPort );
-            // SDL_RenderCopy( gRenderer, gTexture, nullptr, nullptr);
+            SDL_Rect guyRect = { 100, 100, 55, 55};
 
+            SDL_RenderCopy( gRenderer, gGuyTexture, nullptr, &guyRect);
 
+            // update screen
             SDL_RenderPresent(gRenderer);
 
         }
