@@ -4,24 +4,14 @@
 #include <stdio.h>
 #include <string>
 
-const int SCREEN_WIDTH = 1024;
-const int SCREEN_HEIGHT = 768;
+const int SCREEN_WIDTH = 1280;
+const int SCREEN_HEIGHT = 1024;
 
 SDL_Window* gWindow = nullptr;
 SDL_Texture* loadTexture( std::string path );
 SDL_Renderer* gRenderer = nullptr;
 SDL_Texture* gTexture = nullptr; 
 
-enum KeySurfacePresses {
-    KEY_SURFACE_PRESS_DEFAULT,
-    KEY_SURFACE_PRESS_LEFT,
-    KEY_SURFACE_PRESS_RIGHT,
-    KEY_SURFACE_PRESS_DOWN,
-    KEY_SURFACE_PRESS_UP,
-    KEY_SURFACE_PRESS_TOTAL
-}; // pls don't forget semicolon after enum took me decades to debug
-
-SDL_Texture* gKeySurfacePresses[ KEY_SURFACE_PRESS_TOTAL ];
 SDL_Texture* gCurrentTexture = nullptr;
 
 // with this function we initialize creation of window in SDL
@@ -56,36 +46,7 @@ bool init() {
 // load media where i created what happenes if someone clicks specific key on the keyboard
 bool loadMedia() {
     bool success = true;
-    // default image
-    gKeySurfacePresses[ KEY_SURFACE_PRESS_DEFAULT ] = loadTexture("/home/console/Documents/sdl-project/rpg_on_sdl2/png_files/map.png");
-    if(gKeySurfacePresses[ KEY_SURFACE_PRESS_DEFAULT ] == nullptr) {
-        printf("failed to load image: %s\n", SDL_GetError());
-        success = false;
-    }
-    // // on pressing up button
-    gKeySurfacePresses[ KEY_SURFACE_PRESS_UP ] = loadTexture("/home/console/Documents/sdl-project/rpg_on_sdl2/png_files/wallhaven4.png");
-    if(gKeySurfacePresses[ KEY_SURFACE_PRESS_UP ] == nullptr) {
-        printf("failed to load image: %s\n", SDL_GetError());
-        success = false;
-    }
-    // on pressing left button
-    gKeySurfacePresses[ KEY_SURFACE_PRESS_LEFT ] = loadTexture("/home/console/Documents/sdl-project/rpg_on_sdl2/png_files/wallhaven1.png");
-    if(gKeySurfacePresses[ KEY_SURFACE_PRESS_LEFT ] == nullptr) {
-        printf("failed to load image: %s\n", SDL_GetError());
-        success = false;
-    }
-    // on pressing right button
-    gKeySurfacePresses[ KEY_SURFACE_PRESS_RIGHT ] = loadTexture("/home/console/Documents/sdl-project/rpg_on_sdl2/png_files/wallhaven2.png");
-    if(gKeySurfacePresses[ KEY_SURFACE_PRESS_RIGHT ] == nullptr) {
-        printf("failed to load image: %s\n", SDL_GetError());
-        success = false;
-    }
-    // on pressing down button
-    gKeySurfacePresses[ KEY_SURFACE_PRESS_DOWN ] = loadTexture("/home/console/Documents/sdl-project/rpg_on_sdl2/png_files/wallhaven3.png");
-    if(gKeySurfacePresses[ KEY_SURFACE_PRESS_DOWN ] == nullptr) {
-        printf("failed to load image: %s\n", SDL_GetError());
-        success = false;
-    }
+    gTexture = loadTexture("/home/console/Documents/sdl-project/rpg_on_sdl2/png_files/map.png");
     return success;
 }
 
@@ -93,7 +54,6 @@ bool loadMedia() {
 SDL_Texture* loadTexture( std::string path ) {
     SDL_Texture* newTexture = nullptr;
     SDL_Surface* loadedSurface = IMG_Load( path.c_str() );
- // SDL_Surface* optimizedSurface = nullptr; // set it to the null cuz we dont use it for right now until else function
     if(loadedSurface == nullptr) {
         printf("failure during loading surface and rendering image: %s\n", path.c_str(),  IMG_GetError());
     } else {
@@ -132,31 +92,12 @@ int main( int argc, char* args[] ) {
         // don't close before i click the close button
         bool quit = false;
         SDL_Event e;
-        gCurrentTexture = gKeySurfacePresses[ KEY_SURFACE_PRESS_DEFAULT ];
+        gCurrentTexture = gTexture; 
         while(!quit) {
             while(SDL_PollEvent(&e)) {
                 if(e.type == SDL_QUIT) {
                     quit = true;
                 } 
-                else if( e.type == SDL_KEYDOWN ) {
-                    switch ( e.key.keysym.sym ) {
-                        case SDLK_UP:
-                            gCurrentTexture = gKeySurfacePresses[ KEY_SURFACE_PRESS_UP ];
-                            break;
-                        case SDLK_LEFT:
-                            gCurrentTexture = gKeySurfacePresses[ KEY_SURFACE_PRESS_LEFT ];
-                            break;
-                        case SDLK_RIGHT:
-                            gCurrentTexture = gKeySurfacePresses[ KEY_SURFACE_PRESS_RIGHT ];
-                            break;
-                        case SDLK_DOWN:
-                            gCurrentTexture = gKeySurfacePresses[ KEY_SURFACE_PRESS_DOWN ];
-                            break;
-                        default:
-                            gCurrentTexture = gKeySurfacePresses[ KEY_SURFACE_PRESS_DEFAULT ];
-                            break;
-                    }
-                }
             }
             SDL_SetRenderDrawColor( gRenderer, 0xA6, 0x88, 0x81, 0xFF);
             // clears screen
@@ -166,32 +107,32 @@ int main( int argc, char* args[] ) {
             // update screen
            
             // render the cube
-            SDL_Rect fillRect = { SCREEN_WIDTH / 4, SCREEN_HEIGHT / 4, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 };
-            SDL_SetRenderDrawColor( gRenderer, 0xFF, 0x00, 0x00, 0xFF);
-            SDL_RenderFillRect( gRenderer, &fillRect );
-
-            // render green color
-
-            SDL_Rect outlineRect= { SCREEN_WIDTH / 6, SCREEN_HEIGHT / 6, SCREEN_WIDTH * 2 / 3, SCREEN_HEIGHT * 2 / 3 };
-            SDL_SetRenderDrawColor( gRenderer, 0x00, 0xFF, 0x00, 0xFF);
-            SDL_RenderDrawRect( gRenderer, &outlineRect );
-
-            SDL_SetRenderDrawColor( gRenderer, 0x00, 0x00, 0xFF, 0xFF);
-            SDL_RenderDrawLine( gRenderer, 0, SCREEN_HEIGHT / 2, SCREEN_WIDTH, SCREEN_HEIGHT / 2 );
-
-            SDL_SetRenderDrawColor(gRenderer, 0x00, 0x12, 0x83, 0x71);
-            for(int i = 0; i < SCREEN_HEIGHT; i += 4){
-                SDL_RenderDrawPoint( gRenderer, SCREEN_WIDTH / 2, i);
-            }
+            // SDL_Rect fillRect = { SCREEN_WIDTH / 4, SCREEN_HEIGHT / 4, SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2 };
+            // SDL_SetRenderDrawColor( gRenderer, 0xFF, 0x00, 0x00, 0xFF);
+            // SDL_RenderFillRect( gRenderer, &fillRect );
+            //
+            // // render green color
+            //
+            // SDL_Rect outlineRect= { SCREEN_WIDTH / 6, SCREEN_HEIGHT / 6, SCREEN_WIDTH * 2 / 3, SCREEN_HEIGHT * 2 / 3 };
+            // SDL_SetRenderDrawColor( gRenderer, 0x00, 0xFF, 0x00, 0xFF);
+            // SDL_RenderDrawRect( gRenderer, &outlineRect );
+            //
+            // SDL_SetRenderDrawColor( gRenderer, 0x00, 0x00, 0xFF, 0xFF);
+            // SDL_RenderDrawLine( gRenderer, 0, SCREEN_HEIGHT / 2, SCREEN_WIDTH, SCREEN_HEIGHT / 2 );
+            //
+            // SDL_SetRenderDrawColor(gRenderer, 0x00, 0x12, 0x83, 0x71);
+            // for(int i = 0; i < SCREEN_HEIGHT; i += 4){
+            //     SDL_RenderDrawPoint( gRenderer, SCREEN_WIDTH / 2, i);
+            // }
             
-            SDL_Rect topLeftViewPort;
-            topLeftViewPort.x = 0;
-            topLeftViewPort.y = 0;
-            topLeftViewPort.w = SCREEN_WIDTH / 2;
-            topLeftViewPort.h = SCREEN_HEIGHT / 2;
-
-            SDL_RenderSetViewport( gRenderer, &topLeftViewPort );
-            SDL_RenderCopy( gRenderer, gTexture, nullptr, nullptr);
+            // SDL_Rect topLeftViewPort;
+            // topLeftViewPort.x = 0;
+            // topLeftViewPort.y = 0;
+            // topLeftViewPort.w = SCREEN_WIDTH / 2;
+            // topLeftViewPort.h = SCREEN_HEIGHT / 2;
+            //
+            // SDL_RenderSetViewport( gRenderer, &topLeftViewPort );
+            // SDL_RenderCopy( gRenderer, gTexture, nullptr, nullptr);
 
 
             SDL_RenderPresent(gRenderer);
