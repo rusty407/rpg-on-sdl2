@@ -3,6 +3,7 @@
 // #include <cstddef>
 #include <stdio.h>
 #include <string>
+#include "../include/character.h"
 
 const int SCREEN_WIDTH = 1280;
 const int SCREEN_HEIGHT = 1024;
@@ -105,13 +106,17 @@ int main( int argc, char* args[] ) {
         // don't close before i click the close button
         bool quit = false;
         SDL_Event e;
+        Guy guy;
         gCurrentTexture = gTexture; 
         while(!quit) {
             while(SDL_PollEvent(&e)) {
                 if(e.type == SDL_QUIT) {
                     quit = true;
                 } 
+                guy.handleEvent(e);
             }
+            guy.move();
+
             SDL_SetRenderDrawColor( gRenderer, 0xA6, 0x88, 0x81, 0xFF);
             // clears screen
             SDL_RenderClear(gRenderer);
@@ -122,6 +127,8 @@ int main( int argc, char* args[] ) {
             SDL_Rect guyRect = { 100, 100, 55, 55};
             SDL_RenderCopy( gRenderer, gGuyTexture, nullptr, &guyRect);
 
+            // SDL_Rect renderQuad = { mPosX, mPosY, GUY_WIDTH, GUY_HEIGHT }; 
+            // SDL_RenderCopy( gRenderer, gGuyTexture, nullptr, &renderQuad);
             // update screen
             SDL_RenderPresent(gRenderer);
 

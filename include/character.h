@@ -8,7 +8,7 @@ class Guy {
         static const int GUY_VEL = 5;
 
         // initialization of variable
-        Character();
+        Guy();
 
         // handle event
         void handleEvent( SDL_Event& e );
